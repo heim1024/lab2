@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public abstract class LastBil extends Car{
     private boolean flakUp = true;
     public LastBil(int nrDoors, int enginePower, Color color, String modelName, double startX, double startY, Direction startDir, boolean flakUp) {
-        super(nrDoors, enginePower, color, modelName, startX, startY, startDir, false);
+        super(nrDoors, enginePower, color, modelName, startX, startY, startDir, false, false);
     }
 
     public boolean getFlak(){
