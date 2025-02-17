@@ -1,10 +1,9 @@
-/*package Cars;
+package Cars;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCars {
     public Volvo240 vovvo;
@@ -81,19 +80,19 @@ public class TestCars {
     public void turnTest(){
         //Volvo240
         vovvo.turnLeft();
-        assertSame(vovvo.getDirection(), Car.Direction.left);
+        assertSame(Car.Direction.left, vovvo.getDirection());
         vovvo.turnRight();
-        assertSame(vovvo.getDirection(), Car.Direction.right);
+        assertSame(Car.Direction.right, vovvo.getDirection());
         vovvo.move();
-        assertSame(vovvo.getDirection(), Car.Direction.forward);
+        assertSame(Car.Direction.forward, vovvo.getDirection());
 
         //Saab95
         saab.turnLeft();
-        assertSame(saab.getDirection(), Car.Direction.left);
+        assertSame(Car.Direction.left, saab.getDirection());
         saab.turnRight();
-        assertSame(saab.getDirection(), Car.Direction.right);
+        assertSame(Car.Direction.right, saab.getDirection());
         saab.move();
-        assertSame(saab.getDirection(), Car.Direction.forward);
+        assertSame(Car.Direction.forward, saab.getDirection());
     }
 
     @Test
@@ -123,4 +122,3 @@ public class TestCars {
     }
 
 }
-*/
