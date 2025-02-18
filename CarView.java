@@ -18,6 +18,12 @@ public class CarView extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
 
+    public int getX(){
+        return X;
+    }
+    public int getY(){
+        return Y-240;
+    }
     // The controller member
     CarController carC;
 

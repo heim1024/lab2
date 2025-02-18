@@ -48,11 +48,17 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
                 car.move();
+                System.out.println(car.getY());
+                System.out.println(car.getDirection());
+                System.out.println(frame.getY());
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
                 frame.drawPanel.moveit(x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
+                if (car.getY() > frame.getY()-50 || car.getY() < 0){
+                    car.setDir();
+                }
             }
         }
     }
@@ -60,8 +66,7 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars
-                ) {
+        for (Car car : cars) {
             car.gas(gas);
         }
     }

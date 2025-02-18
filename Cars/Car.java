@@ -18,7 +18,7 @@ public abstract class Car implements Movable{
     public abstract double speedFactor();
 
     public enum Direction {
-        forward, right, left
+        forward, back, right, left
     }
 
     public Car(int nrDoors, int enginePower, Color color, String modelName, double x, double y, Direction startDir, boolean loadable, boolean loaded){
@@ -47,6 +47,16 @@ public abstract class Car implements Movable{
 
     public double getX() {return x;}
     public double getY() {return y;}
+
+    public void setDir(){
+        if (direction == Direction.forward){
+            direction = Direction.back;
+        }
+        else {
+            direction = Direction.forward;
+        }
+    }
+
 
     public boolean getLoadable(){return loadable;}
 
@@ -121,6 +131,8 @@ public abstract class Car implements Movable{
     public void move() {
         if(direction == Direction.forward){
             y += currentSpeed;
+        } else if (direction == Direction.back) {
+            y -= currentSpeed;
         } else if (direction == Direction.right) {
             x += currentSpeed;
         } else if (direction == Direction.left) {
