@@ -5,7 +5,7 @@ import java.awt.*;
 public final class Saab95 extends Car {
     private boolean turboOn;
     public Saab95(){
-        super(2, 125, Color.red, "Cars.Saab95", 0, 0, Direction.forward, true, false);
+        super(2, 125, Color.red, "Cars.Saab95", 150, 0, Direction.forward, true, false);
 	    turboOn = false;
         stopEngine();
     }

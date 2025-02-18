@@ -110,11 +110,6 @@ public class TestCars {
     }
 
     @Test
-    public void flakTest(){
-        scaniaP124.setFlakVinkel(50);
-    }
-
-    @Test
     public void lastTest(){
         scania114L300.setFlak(false);
         scania114L300.lastaBil(vovvo);

@@ -48,7 +48,12 @@ public abstract class Car implements Movable{
     public double getX() {return x;}
     public double getY() {return y;}
 
+
+
     public void setDir(){
+        for (int i = 0; i < 100; i++){
+            brake(1);
+        }
         if (direction == Direction.forward){
             direction = Direction.back;
         }
@@ -70,6 +75,9 @@ public abstract class Car implements Movable{
 
     public void setLoaded(boolean bool){
         loaded = bool;
+    }
+    public boolean getLoaded(){
+        return loaded;
     }
 
     public void avlasta(int length){

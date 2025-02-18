@@ -12,6 +12,7 @@ public abstract class LastBil extends Car{
     public boolean getFlak(){
         return flakUp;
     }
+
     public void setFlak(boolean flak){
         if(!isMoving()){
             flakUp = flak;

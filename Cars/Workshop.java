@@ -1,6 +1,7 @@
 package Cars;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Workshop<T extends Car> {
     private int max;
@@ -31,4 +32,11 @@ public class Workshop<T extends Car> {
         }
     }
 
+    public boolean isFull() {
+        return availableSpace > 0;
+    }
+
+    public ArrayList<T> getCars(){
+        return carList;
+    }
 }
