@@ -75,6 +75,7 @@ public abstract class Car implements Movable{
 
     public void setLoaded(boolean bool){
         loaded = bool;
+        stopEngine();
     }
     public boolean getLoaded(){
         return loaded;
@@ -94,8 +95,13 @@ public abstract class Car implements Movable{
     }
 
     public void startEngine(){
-        currentSpeed = 0.1;
-        engineOn = true;
+        if (!getLoaded()){
+            currentSpeed = 0.1;
+            engineOn = true;
+        }else{
+            System.out.println("unload your car first");
+        }
+
     }
     public void stopEngine(){
         currentSpeed = 0;
