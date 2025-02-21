@@ -15,10 +15,10 @@ public final class Scania114L300 extends LastBil {
 
     public void lastaBil(Car car){
         if(!getFlak() && car.getLoadable()){
+            lastList.get(lastNr).setLoaded(true);
             lastList.add(lastNr, car);
             lastList.get(lastNr).setX(getX());
             lastList.get(lastNr).setY(getY());
-            lastList.get(lastNr).setLoaded(true);
             lastNr++;
         }
         else {
@@ -28,7 +28,7 @@ public final class Scania114L300 extends LastBil {
 
     public void lastaAvBil(){
         if(!getFlak()){
-            lastList.get(lastNr).avlasta(10 * lastNr);
+            lastList.get(lastNr).setY(getY() - (10 * lastNr));
             lastList.get(lastNr).setLoaded(false);
             lastList.remove(lastNr);
             lastNr--;

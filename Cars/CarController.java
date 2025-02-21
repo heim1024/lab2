@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -93,26 +92,48 @@ public class CarController {
     void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Car car : cars) {
-            car.gas(gas);
+            if(!car.getLoaded()){
+                car.gas(gas);
+            }
         }
     }
-
-    public void startEngine(){
-        for (Car car : cars){
-            car.startEngine();
-        }
-    }
-
-    public void brake(int brakeAmount){
+    void brake(int brakeAmount){
         for (Car car : cars){
             car.brake(brakeAmount);
         }
     }
 
-    public void setFlak(boolean lift) {
+    void startEngine(){
+        for (Car car : cars){
+            car.startEngine();
+        }
+    }
+    void stopEngine(){
+        for (Car car : cars){
+            car.stopEngine();
+        }
+    }
+
+
+    void setFlak(boolean lift) {
         for (Car car : cars) {
             if (car instanceof LastBil) {
                 ((LastBil) car).setFlak(lift);
+            }
+        }
+    }
+
+    void setTurboOn(){
+        for (Car car : cars){
+            if (car instanceof Saab95){
+                ((Saab95) car).setTurboOn();
+            }
+        }
+    }
+    void setTurboOff(){
+        for (Car car : cars){
+            if (car instanceof Saab95){
+                ((Saab95) car).setTurboOff();
             }
         }
     }

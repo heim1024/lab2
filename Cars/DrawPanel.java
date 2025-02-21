@@ -39,7 +39,6 @@ public class DrawPanel extends JPanel{
             case "Cars.ScaniaP124" -> scaniap124Point;
             default -> NaaaaazPoint;
         };
-
     }
 
     // Initializes the panel and reads the images

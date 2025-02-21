@@ -9,7 +9,7 @@ public abstract class Car implements Movable{
     private final String modelName; // The Cars.car model name
     private boolean engineOn = false;
     private double currentSpeed; // The current speed of the Cars.car
-    public double x, y; // Position coordinates
+    private double x, y; // Position coordinates
     private Color color; // Color of the Cars.car
     private Direction direction; // Direction the car is facing
     private boolean loadable;
@@ -65,12 +65,20 @@ public abstract class Car implements Movable{
 
     public boolean getLoadable(){return loadable;}
 
-    public void setX(double posX){
-        this.x = posX;
+    protected void setX(double posX){
+        if (getLoaded()){
+            this.x = posX;
+        }else{
+            System.out.println("load you car first");
+        }
     }
 
-    public void setY(double posY){
-        this.y = posY;
+    protected void setY(double posY){
+        if (getLoaded()){
+            this.y = posY;
+        }else{
+            System.out.println("load you car first");
+        }
     }
 
     public void setLoaded(boolean bool){
@@ -79,15 +87,6 @@ public abstract class Car implements Movable{
     }
     public boolean getLoaded(){
         return loaded;
-    }
-
-    public void avlasta(int length){
-        if(length <= 60 && length >= 0){
-            y -= length;
-        }
-        else{
-            System.out.println("input number between 0 and 60");
-        }
     }
 
     public boolean isMoving(){

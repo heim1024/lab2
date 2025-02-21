@@ -20,5 +20,4 @@ public final class ScaniaP124 extends LastBil {
             System.out.println("Flaket uppfällt, fäll ner flaket för att köra!");
         }
     }
-
 }
