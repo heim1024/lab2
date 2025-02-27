@@ -40,6 +40,12 @@ public class DrawPanel extends JPanel{
             default -> NaaaaazPoint;
         };
     }
+    public Point getWorkshopPoint(String namn){
+        return switch (namn){
+            case "volvo240Workshop" -> volvoWorkshopPoint;
+            default -> NaaaaazPoint;
+        };
+    }
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {

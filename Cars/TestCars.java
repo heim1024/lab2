@@ -12,12 +12,13 @@ public class TestCars {
     public Workshop<Car> workshop;
     public ScaniaP124 scaniaP124;
     public Scania114L300 scania114L300;
+    public CarView frame;
     @Before
     public void setUp(){
         vovvo = new Volvo240();
         saab = new Saab95();
-        volvoWorkShop = new Workshop<Volvo240>(10);
-        workshop = new Workshop<>(10);
+        volvoWorkShop = new Workshop<Volvo240>(10, frame);
+        workshop = new Workshop<>(10, frame);
         scaniaP124 = new ScaniaP124();
         scania114L300 = new Scania114L300();
     }

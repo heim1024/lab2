@@ -1,16 +1,48 @@
 package Cars;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Workshop<T extends Car> {
     private int max;
+    CarView frame;
     public ArrayList<T> carList = new ArrayList<>(max);
     private int availableSpace;
-    public Workshop(int availableSpace){
+    public Workshop(int availableSpace, CarView frame){
         this.availableSpace = availableSpace;
-        max = availableSpace;
+        this.max = availableSpace;
+        this.carList = new ArrayList<>();
+        this.frame = frame;
     }
+
+    public void workShopStore(Car car) {
+        if (isNearWorkshop(car)) {
+            if (car != null){
+                car.storeCar();
+                park((T) car);
+                System.out.println("Car stored in Workshop!");
+                frame.drawPanel.moveit(-200, -200, frame.drawPanel.getPoint(car));
+            }
+            else{
+                System.out.println("car is null");
+            }
+        }
+    }
+
+
+    public boolean isNearWorkshop(Car car) {
+        if (frame == null) {
+            System.out.println("Error: Frame is not initialized.");
+            return false;
+        }
+
+        int workshopX = frame.drawPanel.getWorkshopPoint("volvo240Workshop").x;
+        int workshopY = frame.drawPanel.getWorkshopPoint("volvo240Workshop").y;
+        int threshold = 50; // Collision range
+
+        return Math.abs(car.getX() - workshopX) < threshold &&
+                Math.abs(car.getY() - workshopY) < threshold;
+    }
+
 
     public void park(T parkCar){
         if (availableSpace > 0){
@@ -33,7 +65,7 @@ public class Workshop<T extends Car> {
     }
 
     public boolean isFull() {
-        return availableSpace > 0;
+        return availableSpace == 0;
     }
 
     public ArrayList<T> getCars(){

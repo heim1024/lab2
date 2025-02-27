@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -26,17 +28,19 @@ public class CarController {
     ArrayList<Car> cars = new ArrayList<>();
 
     //methods:
+    Workshop<Volvo240> volvo240Workshop;
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
+        // Start a new view and send a reference of self
+        cc.frame = new CarView("CarSim 1.0", cc);
+
+        cc.volvo240Workshop = new Workshop<>(5, cc.frame);
 
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
         cc.cars.add(new ScaniaP124());
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
 
         // Start the timer
         cc.timer.start();
@@ -45,7 +49,7 @@ public class CarController {
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    public Workshop<Volvo240> volvo240Workshop = new Workshop<>(5);
+
 
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
@@ -56,17 +60,10 @@ public class CarController {
                     int y = (int) Math.round(car.getY());
                     frame.drawPanel.moveit(x, y, frame.drawPanel.getPoint(car));
 
-                    // Check if Volvo is near the workshop
-                    if (car instanceof Volvo240) {
-                        if (isNearWorkshop(car)) {
-                            car.storeCar();
-                            volvo240Workshop.park((Volvo240) car);
-                            System.out.println("Volvo stored in Workshop!");
-                            frame.drawPanel.moveit(-200,-200, frame.drawPanel.getPoint(car));
-                        }
+                    if (volvo240Workshop.isNearWorkshop(car) && car instanceof Volvo240 && !volvo240Workshop.isFull()){
+                        volvo240Workshop.workShopStore(car);
                     }
-
-                    // Reverse direction if at screen limits
+                    // Reverse direction at screen limits
                     if ((car.getY() > frame.getY() - 65 && car.getDirection() == Car.Direction.forward)
                             || (car.getY() < 20 && car.getDirection() == Car.Direction.back)) {
                         car.setDir();
@@ -78,14 +75,6 @@ public class CarController {
     }
 
 
-
-    private boolean isNearWorkshop(Car car) {
-        int workshopX = 300; // Adjust these based on `DrawPanel` coordinates
-        int workshopY = 300;
-        int threshold = 50; // Collision sensitivity range
-
-        return Math.abs(car.getX() - workshopX) < threshold && Math.abs(car.getY() - workshopY) < threshold;
-    }
 
     // Calls the gas method for each car once
     void gas(int amount) {
