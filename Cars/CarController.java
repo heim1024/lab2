@@ -59,10 +59,9 @@ public class CarController {
                     // Check if Volvo is near the workshop
                     if (car instanceof Volvo240) {
                         if (isNearWorkshop(car)) {
-                            car.setDir();
+                            car.storeCar();
                             volvo240Workshop.park((Volvo240) car);
                             System.out.println("Volvo stored in Workshop!");
-                            car.setLoaded(true);
                             frame.drawPanel.moveit(-200,-200, frame.drawPanel.getPoint(car));
                         }
                     }
@@ -113,7 +112,6 @@ public class CarController {
             car.stopEngine();
         }
     }
-
 
     void setFlak(boolean lift) {
         for (Car car : cars) {

@@ -34,6 +34,19 @@ public abstract class Car implements Movable{
         this.loaded = loaded;
     }
 
+    public void storeCar(){
+        setDir();
+        setLoaded(true);
+    }
+
+    private boolean isNearWorkshop(Car car) {
+        int workshopX = 300; // Adjust these based on `DrawPanel` coordinates
+        int workshopY = 300;
+        int threshold = 50; // Collision sensitivity range
+
+        return Math.abs(car.getX() - workshopX) < threshold && Math.abs(car.getY() - workshopY) < threshold;
+    }
+
     public int getNrDoors(){
         return nrDoors;
     }
