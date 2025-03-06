@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class CarController {
     // member fields:
-
+    private IWorkshop<Volvo240> workshop;
     // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
@@ -28,15 +28,24 @@ public class CarController {
     ArrayList<Car> cars = new ArrayList<>();
 
     //methods:
-    Workshop<Volvo240> volvo240Workshop;
+    public CarController(IWorkshop<Volvo240> workshop) {
+        this.workshop = workshop;
+    }
 
     public static void main(String[] args) {
         // Instance of this class
-        CarController cc = new CarController();
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
+        CarView frame = new CarView("CarSim 1.0", null);
 
-        cc.volvo240Workshop = new Workshop<>(5, cc.frame);
+        IWorkshop<Volvo240> workshop = new Workshop<>(5, frame);
+
+        CarController cc = new CarController(workshop);
+
+        frame.setController(cc);
+        cc.frame = frame;
+
+
+        // Start a new view and send a reference of self
+
 
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
@@ -60,8 +69,8 @@ public class CarController {
                     int y = (int) Math.round(car.getY());
                     frame.drawPanel.moveit(x, y, frame.drawPanel.getPoint(car));
 
-                    if (volvo240Workshop.isNearWorkshop(car) && car instanceof Volvo240 && !volvo240Workshop.isFull()){
-                        volvo240Workshop.workShopStore(car);
+                    if (workshop.isNearWorkshop(car) && car instanceof Volvo240 && !workshop.isFull()){
+                        workshop.workShopStore((Volvo240) car);
                     }
                     // Reverse direction at screen limits
                     if ((car.getY() > frame.getY() - 65 && car.getDirection() == Car.Direction.forward)

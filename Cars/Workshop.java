@@ -2,7 +2,7 @@ package Cars;
 
 import java.util.ArrayList;
 
-public class Workshop<T extends Car> {
+public class Workshop<T extends Car> implements IWorkshop<T> {
     private int max;
     CarView frame;
     public ArrayList<T> carList = new ArrayList<>(max);
@@ -13,7 +13,7 @@ public class Workshop<T extends Car> {
         this.carList = new ArrayList<>();
         this.frame = frame;
     }
-
+    @Override
     public void workShopStore(Car car) {
         if (isNearWorkshop(car)) {
             if (car != null){
@@ -28,7 +28,7 @@ public class Workshop<T extends Car> {
         }
     }
 
-
+    @Override
     public boolean isNearWorkshop(Car car) {
         if (frame == null) {
             System.out.println("Error: Frame is not initialized.");
@@ -43,7 +43,7 @@ public class Workshop<T extends Car> {
                 Math.abs(car.getY() - workshopY) < threshold;
     }
 
-
+    @Override
     public void park(T parkCar){
         if (availableSpace > 0){
         carList.add(parkCar);
@@ -53,7 +53,7 @@ public class Workshop<T extends Car> {
             System.out.println("Not enough space in the workshop!");
         }
     }
-
+    @Override
     public void unPark(T unParkCar){
         if (carList.contains(unParkCar)){
             carList.remove(unParkCar);
@@ -67,6 +67,7 @@ public class Workshop<T extends Car> {
     public boolean isFull() {
         return availableSpace == 0;
     }
+
 
     public ArrayList<T> getCars(){
         return carList;
