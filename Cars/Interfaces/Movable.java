@@ -1,4 +1,4 @@
-package Cars;
+package Cars.Interfaces;
 
 public interface Movable {
 

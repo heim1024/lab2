@@ -1,5 +1,7 @@
 package Cars;
 
+import Cars.Interfaces.CarObserver;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -15,7 +17,7 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame{
+public class CarView extends JFrame implements CarObserver {
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -37,6 +39,8 @@ public class CarView extends JFrame{
     int gasAmount = 0;
     JLabel gasLabel = new JLabel("Amount of gas");
 
+    JButton addCarButton = new JButton("Add Car");
+    JButton removeCarButton = new JButton("Remove Car");
     JButton gasButton = new JButton("Gas");
     JButton brakeButton = new JButton("Brake");
     JButton turboOnButton = new JButton("Saab Turbo on");
@@ -55,6 +59,11 @@ public class CarView extends JFrame{
 
     public void setController(CarController carC) {
         this.carC = carC;
+    }
+
+    @Override
+    public void update() {
+        drawPanel.repaint();
     }
 
 
@@ -96,6 +105,8 @@ public class CarView extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton, 6);
+        controlPanel.add(removeCarButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -166,6 +177,19 @@ public class CarView extends JFrame{
             }
         });
 
+        addCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.addCar();
+            }
+        });
+        removeCarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.removeCar();
+            }
+        });
+
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.
@@ -180,4 +204,6 @@ public class CarView extends JFrame{
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+
 }

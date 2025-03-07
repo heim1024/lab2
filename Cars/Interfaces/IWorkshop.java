@@ -1,4 +1,6 @@
-package Cars;
+package Cars.Interfaces;
+
+import Cars.Car;
 
 public interface IWorkshop <T extends Car> {
     boolean isNearWorkshop(Car car);

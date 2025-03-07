@@ -1,10 +1,12 @@
-package Cars;
+package Cars.Bilar;
+
+import Cars.Car;
 
 import java.awt.*;
 
 public final class Saab95 extends Car {
     private boolean turboOn;
-    public Saab95(){
+    public Saab95(double x, double y){
         super(2, 125, Color.red, "Cars.Saab95", 150, 0, Direction.forward, true, false);
 	    turboOn = false;
         stopEngine();

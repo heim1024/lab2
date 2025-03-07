@@ -1,9 +1,11 @@
-package Cars;
+package Cars.Bilar;
+
+import Cars.LastBil;
 
 import java.awt.*;
 
 public final class ScaniaP124 extends LastBil {
-    public ScaniaP124() {
+    public ScaniaP124(double x, double y) {
         super(2, 310, Color.GREEN, "Cars.ScaniaP124", 10, 0, Direction.forward, true);
     }
 

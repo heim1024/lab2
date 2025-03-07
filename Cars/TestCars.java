@@ -1,5 +1,9 @@
 package Cars;
 
+import Cars.Bilar.Saab95;
+import Cars.Bilar.Scania114L300;
+import Cars.Bilar.ScaniaP124;
+import Cars.Bilar.Volvo240;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,11 +19,11 @@ public class TestCars {
     public CarView frame;
     @Before
     public void setUp(){
-        vovvo = new Volvo240();
-        saab = new Saab95();
+        vovvo = new Volvo240(100, 100);
+        saab = new Saab95(100, 100);
         volvoWorkShop = new Workshop<Volvo240>(10, frame);
         workshop = new Workshop<>(10, frame);
-        scaniaP124 = new ScaniaP124();
+        scaniaP124 = new ScaniaP124(100, 100);
         scania114L300 = new Scania114L300();
     }
 

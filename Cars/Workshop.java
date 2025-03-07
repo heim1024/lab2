@@ -1,5 +1,7 @@
 package Cars;
 
+import Cars.Interfaces.IWorkshop;
+
 import java.util.ArrayList;
 
 public class Workshop<T extends Car> implements IWorkshop<T> {
@@ -20,7 +22,7 @@ public class Workshop<T extends Car> implements IWorkshop<T> {
                 car.storeCar();
                 park((T) car);
                 System.out.println("Car stored in Workshop!");
-                frame.drawPanel.moveit(-200, -200, frame.drawPanel.getPoint(car));
+                frame.drawPanel.moveIt(-200, -200, frame.drawPanel.getPoint(car));
             }
             else{
                 System.out.println("car is null");
@@ -64,10 +66,10 @@ public class Workshop<T extends Car> implements IWorkshop<T> {
         }
     }
 
+    @Override
     public boolean isFull() {
         return availableSpace == 0;
     }
-
 
     public ArrayList<T> getCars(){
         return carList;

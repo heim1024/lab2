@@ -1,9 +1,11 @@
 package Cars;
 
+import Cars.Interfaces.Movable;
+
 import java.awt.*;
 
 
-public abstract class Car implements Movable{
+public abstract class Car implements Movable {
     private final int nrDoors; // Number of doors on the Cars.car
     private final int enginePower; // Engine power of the Cars.car
     private final String modelName; // The Cars.car model name
@@ -75,10 +77,9 @@ public abstract class Car implements Movable{
         }
     }
 
-
     public boolean getLoadable(){return loadable;}
 
-    protected void setX(double posX){
+    public void setX(double posX){
         if (getLoaded()){
             this.x = posX;
         }else{
@@ -86,7 +87,7 @@ public abstract class Car implements Movable{
         }
     }
 
-    protected void setY(double posY){
+    public void setY(double posY){
         if (getLoaded()){
             this.y = posY;
         }else{
