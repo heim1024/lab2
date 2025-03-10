@@ -7,7 +7,7 @@ import java.awt.*;
 public final class Volvo240 extends Car {
     private final static double trimFactor = 1.25;
     public Volvo240(double x, double y){
-        super(4, 100, Color.black, "Cars.Volvo240", 300, 0, Direction.forward, true, false);
+        super(4, 100, Color.black, "Cars.Volvo240", 0, 0, Direction.forward, true, false);
         stopEngine();
     }
 

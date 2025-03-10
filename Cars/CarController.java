@@ -56,16 +56,23 @@ public class CarController {
             String[] carModels = carFactories.keySet().toArray(new String[0]);
             String randomCar = carModels[new Random().nextInt(carModels.length)];
 
-            double randomX = new Random().nextDouble() * 700; // ✅ Spawn at random X (0-700)
-            Car newCar = carFactories.get(randomCar).createCar(randomX, y); // Pass random X, fixed Y
+            double randomX = new Random().nextDouble() * 700; // ✅ Ensure X is random
+            double fixedY = 100; // ✅ Keep Y the same so cars don't overlap vertically
+
+            Car newCar = carFactories.get(randomCar).createCar(randomX, fixedY); // ✅ Correct X and Y passed
             cars.add(newCar);
             System.out.println("Added " + newCar.getModelname() + " at X: " + randomX);
 
-            frame.drawPanel.repaint(); // ✅ Force UI to update
+            frame.drawPanel.addCar(newCar);
+            newCar.setX(randomX);
+            newCar.setY(fixedY);
+            frame.drawPanel.moveIt((int) randomX, (int) fixedY, newCar); // ✅ Explicitly set initial position
+            frame.drawPanel.repaint();
         } else {
             System.out.println("Car limit reached!");
         }
     }
+
 
     public void removeCar() {
         if (!cars.isEmpty()) {
@@ -73,20 +80,11 @@ public class CarController {
             Car removedCar = cars.remove(removeIndex);
             System.out.println("Removed " + removedCar.getModelname());
 
-            frame.drawPanel.moveIt(-500, -500, frame.drawPanel.getPoint(removedCar)); // ✅ Remove car from UI
-            frame.drawPanel.repaint(); // ✅ Force UI update
+            frame.drawPanel.removeCar(removedCar); // ✅ Properly removes car from rendering
+            frame.drawPanel.repaint();
         } else {
             System.out.println("No cars to remove!");
         }
-    }
-
-
-    public Car createCar(String modelName) {
-        CarFactory factory = carFactories.get(modelName);
-        if (factory != null) {
-            return factory.createCar(new Random().nextInt(800), y);
-        }
-        throw new IllegalArgumentException("Unknown car model: " + modelName);
     }
 
     public CarController(IWorkshop<Volvo240> workshop) {
@@ -109,14 +107,6 @@ public class CarController {
         cc.frame = frame;
         cc.addObserver(frame);
 
-
-        // Start a new view and send a reference of self
-
-
-        cc.cars.add(cc.createCar("Cars.Volvo240"));
-        cc.cars.add(cc.createCar("Cars.Saab95"));
-        cc.cars.add(cc.createCar("Cars.ScaniaP124"));
-
         // Start the timer
         cc.timer.start();
     }
@@ -133,7 +123,7 @@ public class CarController {
                     car.move();
                     int x = (int) Math.round(car.getX());
                     int y = (int) Math.round(car.getY());
-                    frame.drawPanel.moveIt(x, y, frame.drawPanel.getPoint(car));
+                    frame.drawPanel.moveIt(x, y, car);
 
                     if (workshop.isNearWorkshop(car) && car instanceof Volvo240 && !workshop.isFull()){
                         workshop.workShopStore((Volvo240) car);

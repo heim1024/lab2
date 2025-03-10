@@ -22,7 +22,7 @@ public class Workshop<T extends Car> implements IWorkshop<T> {
                 car.storeCar();
                 park((T) car);
                 System.out.println("Car stored in Workshop!");
-                frame.drawPanel.moveIt(-200, -200, frame.drawPanel.getPoint(car));
+                frame.drawPanel.moveIt(-200, -200, car);
             }
             else{
                 System.out.println("car is null");

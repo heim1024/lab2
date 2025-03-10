@@ -80,19 +80,11 @@ public abstract class Car implements Movable {
     public boolean getLoadable(){return loadable;}
 
     public void setX(double posX){
-        if (getLoaded()){
-            this.x = posX;
-        }else{
-            System.out.println("load you car first");
-        }
+        this.x = posX;
     }
 
     public void setY(double posY){
-        if (getLoaded()){
-            this.y = posY;
-        }else{
-            System.out.println("load you car first");
-        }
+        this.y = posY;
     }
 
     public void setLoaded(boolean bool){
