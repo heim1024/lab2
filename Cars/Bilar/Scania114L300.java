@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public final class Scania114L300 extends LastBil {
     public Scania114L300() {
-        super(2, 500, Color.MAGENTA, "Cars.Scania114L300", 0, 0, Direction.forward, true);
+        super(2, 500, Color.MAGENTA, "Scania114L300", 0, 0, Direction.forward, true);
 
     }
 

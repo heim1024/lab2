@@ -1,7 +1,6 @@
 package Cars;
 
 import Cars.Bilar.Saab95;
-import Cars.Bilar.ScaniaP124;
 import Cars.Bilar.Volvo240;
 import Cars.Interfaces.CarFactory;
 import Cars.Interfaces.CarObserver;
@@ -10,7 +9,6 @@ import Cars.Factories.ScaniaFactory;
 import Cars.Factories.SaabFactory;
 import Cars.Factories.VolvoFactory;
 
-import javax.swing.*;
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -56,17 +54,17 @@ public class CarController {
             String[] carModels = carFactories.keySet().toArray(new String[0]);
             String randomCar = carModels[new Random().nextInt(carModels.length)];
 
-            double randomX = new Random().nextDouble() * 700; // ✅ Ensure X is random
-            double fixedY = 100; // ✅ Keep Y the same so cars don't overlap vertically
+            double randomX = new Random().nextDouble() * 700;
+            double fixedY = 100;
 
-            Car newCar = carFactories.get(randomCar).createCar(randomX, fixedY); // ✅ Correct X and Y passed
+            Car newCar = carFactories.get(randomCar).createCar(randomX, fixedY);
             cars.add(newCar);
             System.out.println("Added " + newCar.getModelname() + " at X: " + randomX);
 
             frame.drawPanel.addCar(newCar);
             newCar.setX(randomX);
             newCar.setY(fixedY);
-            frame.drawPanel.moveIt((int) randomX, (int) fixedY, newCar); // ✅ Explicitly set initial position
+            frame.drawPanel.moveIt((int) randomX, (int) fixedY, newCar);
             frame.drawPanel.repaint();
         } else {
             System.out.println("Car limit reached!");
@@ -80,7 +78,7 @@ public class CarController {
             Car removedCar = cars.remove(removeIndex);
             System.out.println("Removed " + removedCar.getModelname());
 
-            frame.drawPanel.removeCar(removedCar); // ✅ Properly removes car from rendering
+            frame.drawPanel.removeCar(removedCar);
             frame.drawPanel.repaint();
         } else {
             System.out.println("No cars to remove!");

@@ -77,8 +77,6 @@ public class CarView extends JFrame implements CarObserver {
 
         this.add(drawPanel);
 
-
-
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
@@ -189,9 +187,7 @@ public class CarView extends JFrame implements CarObserver {
                 carC.removeCar();
             }
         });
-
-
-
+        
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
 
